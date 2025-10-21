@@ -30,12 +30,11 @@ jobs:
 
       - name: Run tests
         run: pytest
-        
 
-  build:
-    runs-on: ubuntu-latest
-    needs: [test]
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [build]
+# build:
+#   runs-on: ubuntu-latest
+#   needs: [test]
+  
+# deploy:
+#   runs-on: ubuntu-latest
+#   needs: [build]
