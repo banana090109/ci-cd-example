@@ -84,7 +84,23 @@ jobs:
         with:
           name: app-build
           path: dist
-          
-# deploy:
-#   runs-on: ubuntu-latest
-#   needs: [build]
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-build
+          path: ./artifact
+
+      - name: Simulate deploy
+        env:
+          DEPLOY_TOKEN: ${{secrets.DEPLOY_TOKEN}}
+        run: |
+          echo "Deploying to ${{github.environment}} with token: ${DEPLOY_TOKEN:0:4}****"
+          ls -la ./artifact
+          echo "Deploy success"
